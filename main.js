@@ -1,7 +1,9 @@
 // Main Process
-const { app, BrowserWindow, ipcMain, Notification } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification, Tray, Menu } = require('electron');
 const path = require('path');
 const isDev = !app.isPackaged;
+
+const trayIcon = path.join(__dirname, 'assets', 'images', 'react_icon.png')
 
 function createWindow() {
   // Browser Window <- Renderer Process
@@ -27,7 +29,15 @@ if (isDev) {
   })
 }
 
-app.whenReady().then(createWindow);
+let tray = null;
+app.whenReady().then(() => {
+  const template = require('./utils/Menu').createTemplate(app)
+  const menu = Menu.buildFromTemplate(template);
+  tray = new Tray(trayIcon)
+  tray.setContextMenu(menu)
+  createWindow();
+})
+
 
 ipcMain.on('notify', (_, message) => {
   new Notification({title: 'Notification', body: message}).show();
