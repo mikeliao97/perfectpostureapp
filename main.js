@@ -6,9 +6,10 @@ const url = require('url')
 
 const trayIcon = path.join(__dirname, 'assets', 'images', 'react_icon.png')
 
+let win = null;
 function createWindow() {
   // Browser Window <- Renderer Process
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1200,
     height: 800,
     backgroundColor: "white",
@@ -22,11 +23,10 @@ function createWindow() {
 
   let to = url.format({
     pathname: path.join(__dirname, 'index.html'),
-    hash: '/reports',
+    hash: '/break',
     protocol: 'file:',
-    slashes: true
+    slashes: true,
   })
-  console.log('to', to);
   win.loadURL(to);
 
 
@@ -70,11 +70,31 @@ app.on('activate', () => {
 })
 
 function startBreak() {
-  console.log('start break')
+  win.destroy();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+  let to = url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    hash: '/break',
+    protocol: 'file:',
+    slashes: true
+  })
+  win.loadURL(to);
 }
 
 function Home() {
-  console.log('home')
+  win.destroy();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+  let to = url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    hash: '/products',
+    protocol: 'file:',
+    slashes: true
+  })
+  win.loadURL(to);
 }
 
 // Tray menu
