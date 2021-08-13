@@ -10,7 +10,14 @@ exports.createTemplate = app => {
             app.quit();
           }
       }]
-      },{
+      },
+      {
+          label: 'Start Break',
+          click: () => {
+              console.log('starting break!!')
+          }
+      },
+      {
       label: 'Edit',
       submenu: [
         {
