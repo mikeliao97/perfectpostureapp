@@ -2,6 +2,7 @@
 const { app, BrowserWindow, ipcMain, Notification, Tray, Menu } = require('electron');
 const path = require('path');
 const isDev = !app.isPackaged;
+const url = require('url')
 
 const trayIcon = path.join(__dirname, 'assets', 'images', 'react_icon.png')
 
@@ -19,7 +20,16 @@ function createWindow() {
     }
   })
 
-  win.loadFile('index.html')
+  let to = url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    hash: '/reports',
+    protocol: 'file:',
+    slashes: true
+  })
+  console.log('to', to);
+  win.loadURL(to);
+
+
   isDev && win.webContents.openDevTools();
 }
 
@@ -31,8 +41,7 @@ if (isDev) {
 
 let tray = null;
 app.whenReady().then(() => {
-  const template = require('./utils/Menu').createTemplate(app)
-  const menu = Menu.buildFromTemplate(template);
+  const menu = Menu.buildFromTemplate(getTrayMenu());
   tray = new Tray(trayIcon)
   tray.setContextMenu(menu)
   createWindow();
@@ -60,10 +69,31 @@ app.on('activate', () => {
   }
 })
 
+function startBreak() {
+  console.log('start break')
+}
 
-// Chromium -> web eingine for rendering the UI, full Chrome-like web browser
-// V8 -> engine that provides capabilities to execute, run, JS code in the browser
-// Node JS(V8) -> we are able to run JS code + provides more features
+function Home() {
+  console.log('home')
+}
 
-// Webpack -> is a module builder, main purpose is to bundle JS files for usage in the browsert
-// Babel -> js a JS compiler
+// Tray menu
+function getTrayMenu() {
+  const trayMenu = []
+
+  trayMenu.push({
+    label: "Start break",
+    click: startBreak 
+  }, {
+    type: 'separator'
+  })
+
+  trayMenu.push({
+    label: "Home",
+    click: Home
+  }, {
+    type: 'separator'
+  })
+
+  return trayMenu
+}
