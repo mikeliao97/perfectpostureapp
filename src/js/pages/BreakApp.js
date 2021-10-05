@@ -1,13 +1,15 @@
 import React from 'react';
+import programs from '../data/Programs'
 
 function BreakApp() {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-
-
+  
+  var currentProgram = programs['ROUNDED_SHOULDERS']
   return (
     <div className='home'>
       <h1>BreakApp</h1>
+      <div>
+        name is {currentProgram['meta']['name']}
+      </div>
    </div>
   );
 }

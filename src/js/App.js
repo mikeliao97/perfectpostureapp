@@ -15,11 +15,6 @@ export default function App() {
       .notificationApi
       .sendNotification('My custom message!');
   }
-  // console.log('window.', window.location.href);
-  // const urlSearchParams = new URLSearchParams(window.location.search);
-  // const params = Object.fromEntries(urlSearchParams.entries());
-  // console.log('myParam', params);
-  console.log('has', window.location.hash);
 
   const showNavBar = !window.location.hash.includes('break')
 
