@@ -2,18 +2,6 @@ import React from "react";
 import { chakra, Box, Flex, Heading, useColorModeValue, Link, VStack, Image, Center } from "@chakra-ui/react";
 
 export const WorkoutCard = () => {
-    // return (
-    //     <Flex
-    //         flexDirection="column"
-    //         bg="yellow"
-    //     >
-    //         <Box w="260px" h="300px" bg="orange">
-    //             <Image src="https://bit.ly/sage-adebayo" width="260px" height="300px"></Image>
-    //         </Box>
-    //         <Box></Box>
-    //     </Flex>
-    // );
-
     return (
         <Box height="280px" width="240px" borderWidth="1px" borderRadius="xl" overflow="hidden">
           <Box height="150px" overflow="hidden">
