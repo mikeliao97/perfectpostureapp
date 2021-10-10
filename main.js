@@ -23,7 +23,7 @@ function createWindow() {
 
   let to = url.format({
     pathname: path.join(__dirname, 'index.html'),
-    hash: '/break',
+    hash: '/explore',
     protocol: 'file:',
     slashes: true,
   })

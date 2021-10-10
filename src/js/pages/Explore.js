@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-function Products() {
+function Explore() {
   return (
     <div className='products'>
       <h1>Products</h1>
@@ -9,4 +9,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Explore;
